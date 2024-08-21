@@ -3,11 +3,11 @@ using namespace std;
 
 int Sec_Smallest(int arr[],int n){
     int s_idx=0;
-    int sec_sidx=INT8_MIN;
+    int sec_sidx=-1;
     for(int i=1;i<n;i++){
         if(arr[i]<arr[s_idx]){
-            s_idx=i;
             sec_sidx=s_idx;
+            s_idx=i;
         }
     }
     return sec_sidx;
