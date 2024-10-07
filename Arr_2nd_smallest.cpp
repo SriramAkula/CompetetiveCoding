@@ -3,7 +3,7 @@ using namespace std;
 
 int Sec_Smallest(int arr[],int n){
     int s_idx=0;
-    int sec_sidx=-1;
+    int sec_sidx=n-1;
     for(int i=1;i<n;i++){
         if(arr[i]<arr[s_idx]){
             sec_sidx=s_idx;

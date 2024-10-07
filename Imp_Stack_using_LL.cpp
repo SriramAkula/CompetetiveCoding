@@ -45,7 +45,7 @@ public:
         int val=temp->data;
         head = head->next;
         if(head!=nullptr){
-            head->prev==nullptr;
+            head->prev=nullptr;
         }
         delete temp; 
         if(size%2==0){
