@@ -17,10 +17,10 @@ int main() {
     for(int i=3;i*i<=n;i+=2){
         while(n%i==0){
             n=n/i;
+            lpf=i;
         }
-        lpf=i;
 
-    }Z
+    }
     if(n>1){
         lpf=n;
     }

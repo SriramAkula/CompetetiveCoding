@@ -64,7 +64,7 @@ int main() {
     ListNode* head = createList(values);
 
     Solution sol;
-    int n = 2;
+    int n = 5;
     
     std::cout << "Original list: ";
     printList(head);
