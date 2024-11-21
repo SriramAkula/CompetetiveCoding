@@ -5,62 +5,85 @@
 // Tim-sort - Merge Sort + Insertion sort
 
 #include <iostream>
-#include <algorithm> // Include the necessary header for std::sort
+#include <vector>
 using namespace std;
 
-// Merges and sorts two arrays into a new array
-void merge(int a[], int b[], int m, int n) {
-    int c[m + n];
-    for (int i = 0; i < m; i++) {
-        c[i] = a[i];
-    }
-    for (int i = 0; i < n; i++) {
-        c[m + i] = b[i];
-    }
-    sort(c, c + m + n);
-    
-    cout << "Merged array (merge function): ";
-    for (int i = 0; i < m + n; i++) {
-        cout << c[i] << " ";
-    }
-    cout << endl;
-}
+// Merge two sorted subarrays into one sorted array
+void merge(vector<int>& arr, int left, int mid, int right) {
+    int n1 = mid - left + 1;  // Size of the left subarray
+    int n2 = right - mid;     // Size of the right subarray
 
-// Merges and sorts two arrays in a single pass and prints the result
-void merge1(int a[], int b[], int m, int n) {
-    int i = 0, j = 0;
-    cout << "Merged array (merge1 function): ";
-    while (i < m && j < n) {
-        if (a[i] < b[j]) {
-            cout << a[i] << " ";
+    // Create temporary arrays
+    vector<int> leftArr(n1), rightArr(n2);
+
+    // Copy data to temporary arrays
+    for (int i = 0; i < n1; i++) {
+        leftArr[i] = arr[left + i];
+    }
+    for (int i = 0; i < n2; i++) {
+        rightArr[i] = arr[mid + 1 + i];
+    }
+
+    // Merge the temporary arrays back into the original array
+    int i = 0, j = 0, k = left;
+    while (i < n1 && j < n2) {
+        if (leftArr[i] <= rightArr[j]) {
+            arr[k] = leftArr[i];
             i++;
         } else {
-            cout << b[j] << " ";
+            arr[k] = rightArr[j];
             j++;
         }
+        k++;
     }
-    while (i < m) {
-        cout << a[i] << " ";
+
+    // Copy the remaining elements of leftArr, if any
+    while (i < n1) {
+        arr[k] = leftArr[i];
         i++;
+        k++;
     }
-    while (j < n) {
-        cout << b[j] << " ";
+
+    // Copy the remaining elements of rightArr, if any
+    while (j < n2) {
+        arr[k] = rightArr[j];
         j++;
+        k++;
     }
-    cout << endl;
+}
+
+// Merge Sort function
+void mergeSort(vector<int>& arr, int left, int right) {
+    if (left < right) {
+        // Find the middle point to divide the array into two halves
+        int mid = left + (right - left) / 2;
+
+        // Recursively sort the first and second halves
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+
+        // Merge the sorted halves
+        merge(arr, left, mid, right);
+    }
 }
 
 int main() {
-    int arr1[] = {1, 3, 5, 7};
-    int arr2[] = {2, 4, 6, 8};
-    int m = sizeof(arr1) / sizeof(arr1[0]);
-    int n = sizeof(arr2) / sizeof(arr2[0]);
+    vector<int> arr = {12, 11, 13, 5, 6, 7};
+    int n = arr.size();
 
-    // Testing merge function
-    merge(arr1, arr2, m, n);
+    cout << "Given array: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
 
-    // Testing merge1 function
-    merge1(arr1, arr2, m, n);
+    mergeSort(arr, 0, n - 1);
+
+    cout << "Sorted array: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
 
     return 0;
 }
