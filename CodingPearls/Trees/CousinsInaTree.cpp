@@ -11,6 +11,32 @@ TreeNode* addNode(int x){
     newNode->left=newNode->right=NULL;
     return newNode;
 }
+    // TreeNode* x_parent=NULL;
+    // TreeNode* y_parent=NULL;
+    // int x_level=-1;
+    // int y_level=-1;
+    // void help(TreeNode* root,int x,int y,int level,TreeNode* parent){
+    //     if(!root || (x_parent!=NULL && y_parent!=NULL) || (x_level!=-1 && y_level!=-1)){
+    //         return;
+    //     }
+    //     if(root->val==x){
+    //         x_parent=parent;
+    //         x_level=level;
+    //         return;
+    //     }
+    //     if(root->val==y){
+    //         y_parent=parent;
+    //         y_level=level;
+    //         return;
+    //     }
+    //     help(root->left,x,y,level+1,root);
+    //     help(root->right,x,y,level+1,root);
+    // }
+    // bool isCousins(TreeNode* root, int x, int y) {
+    //     help(root,x,y,0,nullptr);
+    //     return x_level==y_level && x_parent!=y_parent;
+
+    // }
 bool isCousins(TreeNode* root, int x, int y) {
     if(!root){
         return false;
